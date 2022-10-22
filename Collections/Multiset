@@ -1,0 +1,60 @@
+static class MultiSet<T>{
+        private TreeMap<T, Integer> m;
+ 
+        public MultiSet(){
+            m = new TreeMap<>();
+        }
+ 
+        public boolean contains(T val){
+            return m.containsKey(val);
+        }
+ 
+        public int size(){
+            return m.size();
+        }
+ 
+        public void add(T val){
+            m.put(val, m.getOrDefault(val, 0) + 1);
+        }
+ 
+        public void remove(T val){
+            if(contains(val)){
+                m.put(val, m.get(val) - 1);
+                if(m.get(val) == 0){
+                    m.remove(val);
+                }
+            }
+        }
+ 
+        public T minValue(){
+            if(m.isEmpty()){return null;}
+            return m.firstKey();
+        }
+ 
+        public T maxValue(){
+            if(m.isEmpty()){return null;}
+            return m.lastKey();
+        }
+ 
+        public T lessOrEqual(T val){
+            return m.floorKey(val);
+        }
+ 
+        public T greaterOrEqual(T val){
+            return m.ceilingKey(val);
+        }
+ 
+        public T less(T val){
+            return m.lowerKey(val);
+        }
+ 
+        public T greater(T val){
+            return m.higherKey(val);
+        }
+ 
+        @Override
+        public String toString() {
+            return m.toString();
+        }
+    }
+ 
